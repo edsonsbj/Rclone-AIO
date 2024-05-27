@@ -13,113 +13,114 @@ This is a bash script to facilitate the use of rclone commands with various opti
     ```bash
     chmod +x script.sh
     ```
-## Uso
+## Use
+
+Display the help menu
 
 ```bash
-Uso: /usr/local/bin/Rclone-Aio-v9 [opções] origem destino [ -e flags_do_rclone]
+./Rclone-AIO.sh -h
+```
 
-Opções:
-  -c (Copy)     Copie arquivos da origem para o destino, ignorando arquivos idênticos.
-  -s (Sync)     Torne a origem e o destino idênticos, modificando apenas o destino.
-  -m (Move)     Move arquivos da origem para o destino.
-  -d (delete)   Remova os arquivos no caminho.
-  -r (rmdirs)   Remova os diretórios vazios no caminho.
-  -C (cleanup)  Limpe o controle remoto, se possível. Esvazie a lixeira ou exclua versões antigas de arquivos. Não suportado por todos os controles remotos.
-  -n            Adiciona a flag --dry-run ao rclone.
-  -f arquivo    Adiciona a flag --filter-from com o arquivo especificado ao rclone.
-  -e            Adiciona flags extras ao comando rclone.
+```bash
+Usage: ./Rclone-AIO.sh [options] source destination [ -e flags_do_rclone]
 
-Exemplos:
-  /usr/local/bin/Rclone-Aio-v9 -c 'local:caminho/origem' 'cloud:caminho/destino'
-  /usr/local/bin/Rclone-Aio-v9 -c 'ftp:/caminho/origem' 'cloud:caminho/destino' -e --max-age=7d
-  /usr/local/bin/Rclone-Aio-v9 -c 'local:caminho/origem' 'cloud:caminho/destino' -f '/caminho/para/filtro.lst'
-  /usr/local/bin/Rclone-Aio-v9 -s 'local:caminho/origem' 'cloud:caminho/destino'
-  /usr/local/bin/Rclone-Aio-v9 -s 'ftp:/caminho/origem' 'cloud:caminho/destino' -e --max-age=7d
-  /usr/local/bin/Rclone-Aio-v9 -n -s 'local:caminho/origem' 'cloud:caminho/destino' -f '/caminho/para/filtro.lst'
-  /usr/local/bin/Rclone-Aio-v9 -n -s 'local:caminho/origem' 'cloud:caminho/destino' -f '/caminho/para/filtro.lst' -e --max-age=7d
-  /usr/local/bin/Rclone-Aio-v9 -C 'cloud:/'
-  /usr/local/bin/Rclone-Aio-v9 -d 'cloud:caminho/destino'
-  /usr/local/bin/Rclone-Aio-v9 -r 'cloud:caminho/destino'
+Options:
+  -c (Copy)	 Copy files from source to destination, ignoring identical files.
+  -s (Sync) 	 Make the source and destination identical, modifying only the destination.
+  -m (Move)	 Move files from source to destination.
+  -d (delete)	 Remove files in the path.
+  -r (rmdirs)	 Remove empty directories in the path.
+  -C (cleanup) Clean up the remote if possible. Empty the recycle garbage can or delete old versions of files. Not supported by all remotes.
+  -n 		 Adds the --dry-run flag to rclone.
+  -f file	 Adds the --filter-from flag with the specified file to rclone.
+  -e 		 Adds extra flags to the rclone command.
+
+Examples:
+  ./Rclone-AIO.sh -c 'local:path/origin' 'cloud:path/destination'
+  ./Rclone-AIO.sh -c 'ftp:/path/origin' 'cloud:path/destination' -e --max-age=7d
+  ./Rclone-AIO.sh -c 'local:path/origin' 'cloud:path/destination' -f '/path/to/filter.lst'
+  ./Rclone-AIO.sh -s 'local:path/origin' 'cloud:path/destination'
+  ./Rclone-AIO.sh -s 'ftp:/path/origin' 'cloud:path/destination' -e --max-age=7d
+  ./Rclone-AIO.sh -n -s 'local:path/origin' 'cloud:path/destination' -f '/path/to/filter.lst'
+  ./Rclone-AIO.sh -n -s 'local:path/origin' 'cloud:path/destination' -f '/path/to/filter.lst' -e --max-age=7d
+  ./Rclone-AIO.sh -C 'cloud:/'
+  ./Rclone-AIO.sh -d 'cloud:path/destination'
+  ./Rclone-AIO.sh -r 'cloud:path/destination'
 
 ```
 
-### Opções
+### Options
 
-- `-c (Copy)`: Copie arquivos da origem para o destino, ignorando arquivos idênticos.
-- `-s (Sync)`: Torne a origem e o destino idênticos, modificando apenas o destino.
-- `-m (Move)`: Mova arquivos da origem para o destino.
-- `-d (Delete)`: Remova os arquivos no caminho.
-- `-r (Remove Dirs)`: Remova os diretórios vazios no caminho.
-- `-C (Cleanup)`: Limpe o controle remoto, se possível. Esvazie a lixeira ou exclua versões antigas de arquivos (não suportado por todos os controles remotos).
-- `-n (Dry Run)`: Adiciona a flag `--dry-run` ao rclone.
-- `-f arquivo`: Adiciona a flag `--filter-from` com o arquivo especificado ao rclone.
-- `-e`: Adiciona flags extras ao comando rclone.
+ - `-c (Copy)`:	Copy files from source to destination, ignoring identical files.
+ - `-s (Sync)`: Make the source and destination identical, modifying only the destination.
+ - `-m (Move)`:	Move files from source to destination.
+ - `-d (delete)`: Remove files in the path.
+ - `-r (rmdirs)`: Remove empty directories in the path.
+ - `-C (cleanup)`: Clean up the remote if possible. Empty the recycle garbage can or delete old versions of files. Not supported by all remotes.
+ - `-n`: Adds the --dry-run flag to rclone.
+ - `-f file`: Adds the --filter-from flag with the specified file to rclone.
+ - `-e`: Adds extra flags to the rclone command.
 
-### Exemplos
+### Examples
 
-#### Copiar arquivos
+#### Copy files or folders
 
 ```bash
-./script.sh -c origem:/caminho origem:/pasta destino:/pasta
+./Rclone-AIO.sh -c 'local:path/origin' 'cloud:path/destination'
 ```
 
-#### Sincronizar pastas
+#### Synchronize files or folders
 
 ```bash
-./script.sh -s origem:/pasta destino:/pasta
+./Rclone-AIO.sh -s 'local:path/origin' 'cloud:path/destination'
 ```
 
-#### Mover arquivos
+#### Move files or folders
 
 ```bash
-./script.sh -m origem:/pasta destino:/pasta
+./Rclone-AIO.sh -m 'local:path/origin' 'cloud:path/destination'
 ```
 
-#### Deletar arquivos
+#### Dekete files or folders
 
 ```bash
-./script.sh -d destino:/pasta/arquivo
+./Rclone-AIO.sh -d 'cloud:path/destination'
 ```
 
-#### Remover diretórios vazios
+#### Remove empty directories
 
 ```bash
-./script.sh -r destino:/pasta
+./Rclone-AIO.sh -r 'cloud:path/destination'
 ```
 
-#### Limpar o controle remoto
+#### Cleaning the remote control
 
 ```bash
-./script.sh -C destino:/
+./Rclone-AIO.sh -C 'cloud:path/destination'
 ```
 
-#### Copiar arquivos com filtro
+#### Copy files with filter
 
+- Using a filter file would be like adding exclusion patterns to the rclone include command.
+- To find out more, see the rclone documentation [Rclone](https://rclone.org/filtering/).
+  
 ```bash
-./script.sh -c origem:/pasta destino:/pasta -f caminho/para/filtro.lst
+./Rclone-AIO.sh -c 'local:path/origin' 'cloud:path/destination' -f '/path/to/filter.lst'
 ```
 
-#### Sincronizar com flags adicionais
+#### Synchronize with additional flags
+
+- The script has already been designed with support for some flags if you want to add others you can do so by following this example
 
 ```bash
-./script.sh -s origem:/pasta destino:/pasta -e --max-age=7d
+./Rclone-AIO.sh -s 'ftp:/path/origin' 'cloud:path/destination' -e --max-age=7d
 ```
 
 ## Logs
 
 O script cria um arquivo de log para registrar as saídas dos comandos em `/var/log/Rclone/Rclone-AIO-$(date +%Y%m%d).log`.
 
-## Contribuição
+## Contribution
 
-Sinta-se à vontade para contribuir enviando issues e pull requests. Todas as contribuições são bem-vindas!
+Feel free to contribute by sending issues and pull requests. All contributions are welcome!
 
-## Licença
-
-Este projeto está licenciado sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
-```
-
-### Sugestões Adicionais
-
-- Substitua o placeholder `script.sh` pelo nome real do seu script.
-- Certifique-se de que o caminho para o arquivo de log seja acessível e tenha permissões corretas.
-- Adicione qualquer outra informação que considere relevante, como dependências específicas, notas de versão, ou autores.
