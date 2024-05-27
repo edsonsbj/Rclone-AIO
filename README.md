@@ -11,7 +11,7 @@ This is a bash script to facilitate the use of rclone commands with various opti
 1. Clone the repository or download the script.
 2. Make sure the script has execute permission:
     ```bash
-    chmod +x script.sh
+    chmod +x ./Rclone-AIO.sh 
     ```
 ## Use
 
