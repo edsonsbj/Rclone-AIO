@@ -15,6 +15,33 @@ exec 2>&1
 # Function for error messages
 errorecho() { cat <<< "$@" 1>&2; }
 
+# Function to check if rclone is installed, otherwise install it
+check_install_rclone() {
+    if [ -z "$RCLONE_INSTALLED" ]; then
+        echo "rclone not found. Installing..." | tee -a $LogFile
+        sudo -v && curl https://rclone.org/install.sh | sudo bash
+    else
+        echo "rclone is already installed." | tee -a $LogFile
+    fi
+}
+
+# Get the path of the rclone configuration file using the 'rclone config file' command
+RCLONE_CONFIG_PATH=$(rclone config file | tail -1)
+
+# Check if the configuration file exists at the obtained path
+if [ -f "$RCLONE_CONFIG_PATH" ]; then
+    # If it exists, export the RCLONE_CONFIG variable
+    export RCLONE_CONFIG="$RCLONE_CONFIG_PATH"
+    echo "Rclone configuration file found and exported: $RCLONE_CONFIG"
+else
+    # If it does not exist, ask the user to provide the correct path
+    echo "Rclone configuration file not found."
+    echo "Please enter the correct path to the rclone configuration file:"
+    read -r RCLONE_CONFIG_PATH
+    export RCLONE_CONFIG="$RCLONE_CONFIG_PATH"
+    echo "The path you entered has been exported: $RCLONE_CONFIG"
+fi
+
 # Function to add the --dry-run flag if -n is passed
 add_dry_run() {
     if [[ "$DRY_RUN" == 'true' ]]; then
