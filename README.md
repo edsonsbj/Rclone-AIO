@@ -1,29 +1,46 @@
-# Rclone-AIO
-This Repository contains a shell script that executes various functions using the Rclone tool 
-
-```markdown
 # Rclone AIO Script
 
-Este é um script bash para facilitar o uso de comandos rclone com várias opções e funcionalidades adicionais. Ele suporta copiar, sincronizar, mover, deletar arquivos, remover diretórios vazios e limpar o controle remoto. O script também oferece suporte para adicionar filtros e flags adicionais do rclone.
+This is a bash script to facilitate the use of rclone commands with various options and additional features. It supports copying, synchronizing, moving, deleting files, removing empty directories and wiping the remote. The script also supports adding additional rclone filters and flags.
 
 ## Requisitos
 
 - [Rclone](https://rclone.org/)
-- OpenSSL
 
 ## Instalação
 
-1. Clone o repositório ou faça o download do script.
-2. Assegure-se de que o script tem permissão de execução:
+1. Clone the repository or download the script.
+2. Make sure the script has execute permission:
     ```bash
     chmod +x script.sh
     ```
-3. Configure a variável `RCLONE_CONFIG_PASS` conforme necessário para sua instalação do rclone.
-
 ## Uso
 
 ```bash
-./script.sh [opções] origem destino [ -e flags_do_rclone]
+Uso: /usr/local/bin/Rclone-Aio-v9 [opções] origem destino [ -e flags_do_rclone]
+
+Opções:
+  -c (Copy)     Copie arquivos da origem para o destino, ignorando arquivos idênticos.
+  -s (Sync)     Torne a origem e o destino idênticos, modificando apenas o destino.
+  -m (Move)     Move arquivos da origem para o destino.
+  -d (delete)   Remova os arquivos no caminho.
+  -r (rmdirs)   Remova os diretórios vazios no caminho.
+  -C (cleanup)  Limpe o controle remoto, se possível. Esvazie a lixeira ou exclua versões antigas de arquivos. Não suportado por todos os controles remotos.
+  -n            Adiciona a flag --dry-run ao rclone.
+  -f arquivo    Adiciona a flag --filter-from com o arquivo especificado ao rclone.
+  -e            Adiciona flags extras ao comando rclone.
+
+Exemplos:
+  /usr/local/bin/Rclone-Aio-v9 -c 'local:caminho/origem' 'cloud:caminho/destino'
+  /usr/local/bin/Rclone-Aio-v9 -c 'ftp:/caminho/origem' 'cloud:caminho/destino' -e --max-age=7d
+  /usr/local/bin/Rclone-Aio-v9 -c 'local:caminho/origem' 'cloud:caminho/destino' -f '/caminho/para/filtro.lst'
+  /usr/local/bin/Rclone-Aio-v9 -s 'local:caminho/origem' 'cloud:caminho/destino'
+  /usr/local/bin/Rclone-Aio-v9 -s 'ftp:/caminho/origem' 'cloud:caminho/destino' -e --max-age=7d
+  /usr/local/bin/Rclone-Aio-v9 -n -s 'local:caminho/origem' 'cloud:caminho/destino' -f '/caminho/para/filtro.lst'
+  /usr/local/bin/Rclone-Aio-v9 -n -s 'local:caminho/origem' 'cloud:caminho/destino' -f '/caminho/para/filtro.lst' -e --max-age=7d
+  /usr/local/bin/Rclone-Aio-v9 -C 'cloud:/'
+  /usr/local/bin/Rclone-Aio-v9 -d 'cloud:caminho/destino'
+  /usr/local/bin/Rclone-Aio-v9 -r 'cloud:caminho/destino'
+
 ```
 
 ### Opções
