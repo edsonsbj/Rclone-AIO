@@ -43,12 +43,13 @@ display_menu() {
     echo "  -f file	 Adds the --filter-from flag with the specified file to rclone."
     echo "  -e 		 Adds extra flags to the rclone command."
     echo
-    echo "Exemplos:"
+    echo "Examples:"
     echo "  $0 -c 'local:path/origin' 'cloud:path/destination'"
     echo "  $0 -c 'ftp:/path/origin' 'cloud:path/destination' -e --max-age=7d"
     echo "  $0 -c 'local:path/origin' 'cloud:path/destination' -f '/path/to/filter.lst'"
     echo "  $0 -s 'local:path/origin' 'cloud:path/destination'"
     echo "  $0 -s 'ftp:/path/origin' 'cloud:path/destination' -e --max-age=7d"
+    echo "  $0 -m 'local:path/origin' 'cloud:path/destination'
     echo "  $0 -n -s 'local:path/origin' 'cloud:path/destination' -f '/path/to/filter.lst'"
     echo "  $0 -n -s 'local:path/origin' 'cloud:path/destination' -f '/path/to/filter.lst' -e --max-age=7d"
     echo "  $0 -C 'cloud:/'"
