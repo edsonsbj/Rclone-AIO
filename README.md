@@ -116,10 +116,6 @@ Examples:
 ./Rclone-AIO.sh -s 'ftp:/path/origin' 'cloud:path/destination' -e --max-age=7d
 ```
 
-## Logs
-
-O script cria um arquivo de log para registrar as saídas dos comandos em `/var/log/Rclone/Rclone-AIO-$(date +%Y%m%d).log`.
-
 ## Contribution
 
 Feel free to contribute by sending issues and pull requests. All contributions are welcome!
